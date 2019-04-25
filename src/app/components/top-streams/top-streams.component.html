@@ -1,0 +1,45 @@
+<ul class="collection col s12 m12 l10" *ngFor="let post of topPosts">
+  <li class="collection-item avatar">
+    <img
+      src="https://res.cloudinary.com/df7kqxpgp/image/upload/v{{ post.user.picVersion }}/{{ post.user.picId }}"
+      alt=""
+      class="circle"
+    />
+    <span class="title">{{ post.username }}</span>
+    <p class="time">{{ TimeFromNow(post.created) }}</p>
+  </li>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-image">
+          <!-- <img src="https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_960_720.jpg" /> -->
+        </div>
+        <div class="card-content">
+          <p>{{ post.post }}</p>
+        </div>
+        <div class="card-action">
+          <i
+            (click)="LikePost(post)"
+            class="material-icons"
+            [ngClass]="!CheckInLikesArray(post.likes, user.username) ? 'notLiked' : 'liked'"
+          >
+            thumb_up
+          </i>
+          <span class="iconSpan">
+            {{ post.totalLikes }}
+          </span>
+          <i
+            class="material-icons"
+            (click)="OpenCommentBox(post)"
+            [ngClass]="!CheckInLikesArray(post.comments, user.username) ? 'notLiked' : 'liked'"
+            >chat</i
+          >
+          <span class="iconSpan">
+            {{ post.comments.length }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ul>
